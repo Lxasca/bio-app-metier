@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des échantillons
+{% endblock %}
+
+{% block body %}
+	<h1>Liste des échantillons</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Type</th>
+				<th>Source</th>
+				<th>Date de collecte</th>
+				<th>Statut</th>
+				<th>Projet</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for sample in samples %}
+				<tr>
+					<td>{{ sample.id }}</td>
+					<td>{{ sample.type }}</td>
+					<td>{{ sample.source }}</td>
+					<td>{{ sample.collectionDate ? sample.collectionDate|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ sample.status }}</td>
+					<td>{{ sample.project ? sample.project.name : 'Pas de projet' }}</td>
+					<td>
+						<a href="{{ path('app_sample_show', {'id': sample.id}) }}">Voir</a>
+						<a href="{{ path('app_sample_edit', {'id': sample.id}) }}">Editer</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6">Aucun échantillon.</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

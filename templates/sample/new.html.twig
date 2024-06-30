@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel échantillon
+{% endblock %}
+
+{% block body %}
+	<h1>Créer un nouvel échantillon</h1>
+
+	{{ include('sample/_form.html.twig') }}
+
+	<a href="{{ path('app_sample_index') }}">Retourner à la liste des échantillons</a>
+{% endblock %}

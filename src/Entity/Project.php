@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProjectRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +30,17 @@ class Project
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $status = null;
+
+    /**
+     * @var Collection<int, Sample>
+     */
+    #[ORM\OneToMany(targetEntity: Sample::class, mappedBy: 'project')]
+    private Collection $samples;
+
+    public function __construct()
+    {
+        $this->samples = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +103,36 @@ class Project
     public function setStatus(?string $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sample>
+     */
+    public function getSamples(): Collection
+    {
+        return $this->samples;
+    }
+
+    public function addSample(Sample $sample): static
+    {
+        if (!$this->samples->contains($sample)) {
+            $this->samples->add($sample);
+            $sample->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSample(Sample $sample): static
+    {
+        if ($this->samples->removeElement($sample)) {
+            // set the owning side to null (unless already changed)
+            if ($sample->getProject() === $this) {
+                $sample->setProject(null);
+            }
+        }
 
         return $this;
     }

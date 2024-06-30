@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Echantillon
+{% endblock %}
+
+{% block body %}
+	<h1>Echantillon</h1>
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ sample.id }}</td>
+			</tr>
+			<tr>
+				<th>Type</th>
+				<td>{{ sample.type }}</td>
+			</tr>
+			<tr>
+				<th>Source</th>
+				<td>{{ sample.source }}</td>
+			</tr>
+			<tr>
+				<th>Date de collection</th>
+				<td>{{ sample.collectionDate ? sample.collectionDate|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Statut</th>
+				<td>{{ sample.status }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_sample_index') }}">Retourner à la liste des échantillons</a>
+
+	<a href="{{ path('app_sample_edit', {'id': sample.id}) }}">Editer</a>
+
+	{{ include('sample/_delete_form.html.twig') }}
+{% endblock %}

@@ -43,7 +43,7 @@ class ProjectType extends AbstractType
                 'required' => false
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Créer le projet'
+                'label' => 'Enregistrer le projet'
             ])
         ;
     }

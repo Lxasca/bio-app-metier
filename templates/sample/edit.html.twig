@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer un échantillon
+{% endblock %}
+
+{% block body %}
+	<h1>Editer un échantillon</h1>
+
+	{{ include('sample/_form.html.twig') }}
+
+	<a href="{{ path('app_sample_index') }}">Retourner à la liste des échantillons</a>
+
+	{{ include('sample/_delete_form.html.twig') }}
+{% endblock %}
