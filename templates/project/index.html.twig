@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des projets
+{% endblock %}
+
+{% block body %}
+	{% include "/_partials/section-app-user.html.twig" %}
+
+	<h1>Liste des projets</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nom</th>
+				<th>Description</th>
+				<th>Date de début</th>
+				<th>Date de fin</th>
+				<th>Statut</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for project in projects %}
+				<tr>
+					<td>{{ project.id }}</td>
+					<td>{{ project.name }}</td>
+					<td>{{ project.description }}</td>
+					<td>{{ project.startDate ? project.startDate|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ project.endDate ? project.endDate|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ project.status }}</td>
+					<td>
+						<a href="{{ path('app_project_show', {'id': project.id}) }}">Voir</a>
+						<a href="{{ path('app_project_edit', {'id': project.id}) }}">Editer</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="7">Il n'y a pas encore de projet.</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_project_new') }}">Créer un nouveau projet</a>
+{% endblock %}
