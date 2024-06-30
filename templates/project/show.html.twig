@@ -35,6 +35,20 @@
 		</tbody>
 	</table>
 
+	<section>
+		<h3>Les échantillons du projet</h3>
+
+		{% for sample in samples %}
+			<div>
+				{{ sample.type }}
+				{{ sample.source }}
+				{{ sample.collectionDate|date('d/m/Y') }}
+				{{ sample.status }}
+				<a href="{{ path('app_sample_show', {'id': sample.id}) }}">Voir</a>
+			</div>
+		{% endfor %}
+	</section>
+
 	<a href="{{ path('app_project_index') }}">Retourner à la liste des projets</a>
 
 	<a href="{{ path('app_project_edit', {'id': project.id}) }}">Editer</a>

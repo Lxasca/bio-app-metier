@@ -49,6 +49,7 @@ class ProjectController extends AbstractController
     {
         return $this->render('project/show.html.twig', [
             'project' => $project,
+            'samples' => $project->getSamples()
         ]);
     }
 
