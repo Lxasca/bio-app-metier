@@ -1,0 +1,14 @@
+<section>
+	{# Lien de redirection vers la page d'accueil, uniquement si on ne s'y trouve pas déjà #}
+	{% if app.request.attributes.get('_route') != 'app_home' %}
+		<a href="{{ path('app_home') }}">Accueil</a>
+	{% endif %}
+
+	{% if app.user %}
+		<a href="{{ path('app_logout')}}">Se déconnecter</a>
+		<a href="{{ path('app_account')}}">Mon compte</a>
+	{% else %}
+		<a href="{{ path('app_register')}}">S'inscrire</a>
+		<a href="{{ path('app_login')}}">Se connecter</a>
+	{% endif %}
+</section>
