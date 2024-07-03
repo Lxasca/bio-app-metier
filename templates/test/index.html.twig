@@ -1,38 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Test index
+{% block title %}Tests
 {% endblock %}
 
 {% block body %}
-	<h1>Test index</h1>
+	<h4>
+		<i class="fas fa-align-right me-3"></i>
+		Liste des tests
+	</h4>
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Titre</th>
-				<th>Scenario</th>
-				<th>Echantillon</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for test in tests %}
+	<div class="container-table">
+		<table class="table">
+			<thead>
 				<tr>
-					<td>{{ test.id }}</td>
-					<td>{{ test.title }}</td>
-					<td>{{ test.scenario }}</td>
-					<td>{{ test.sample }}</td>
-					<td>
-						<a href="{{ path('app_test_show', {'id': test.id}) }}">Voir</a>
-						<a href="{{ path('app_test_edit', {'id': test.id}) }}">Editer</a>
-					</td>
+					<th>Titre</th>
+					<th>Echantillon</th>
+					<th></th>
 				</tr>
-			{% else %}
-				<tr>
-					<td colspan="4">Pas de test.</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				{% for test in tests %}
+					<tr>
+						<td>{{ test.title }}</td>
+						<td>
+							{% if  test.sample %}
+								{{  test.sample }}
+								<a href="{{ path('app_sample_show', {'id': test.sample.id}) }}">
+									<i class="fas fa-up-right-from-square ms-1"></i>
+								</a>
+							{% endif %}
+						</td>
+						<td>
+							{% include '_partials/_partials_table_actions.html.twig' with {
+								'entity_type': 'test',
+								'entity_id': test.id,
+								'show_route': 'app_test_show',
+								'edit_route': 'app_test_edit'
+							} %}
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="4">Pas de test.</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 {% endblock %}

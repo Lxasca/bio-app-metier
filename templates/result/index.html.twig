@@ -4,35 +4,49 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Liste des résultats</h1>
+	<h4>
+		<i class="fas fa-align-right me-3"></i>
+		Liste des résultats
+	</h4>
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Observation</th>
-				<th>Test</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for result in results %}
+	<div class="container-table">
+		<table class="table">
+			<thead>
 				<tr>
-					<td>{{ result.id }}</td>
-					<td>{{ result.observation }}</td>
-					<td>{{ result.test }}</td>
-					<td>
-						<a href="{{ path('app_result_show', {'id': result.id}) }}">Voir</a>
-						<a href="{{ path('app_result_edit', {'id': result.id}) }}">Editer</a>
-					</td>
+					<th>Observation</th>
+					<th>Test</th>
+					<th></th>
 				</tr>
-			{% else %}
-				<tr>
-					<td colspan="3">Pas de résultat.</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				{% for result in results %}
+					<tr>
+						<td>{{ result.observation }}</td>
+						<td>
+							{% if  result.test %}
+								{{  result.test }}
+								<a href="{{ path('app_test_show', {'id': result.test.id}) }}">
+									<i class="fas fa-up-right-from-square ms-1"></i>
+								</a>
+							{% endif %}
+						</td>
+						<td>
+							{% include '_partials/_partials_table_actions.html.twig' with {
+								'entity_type': 'result',
+								'entity_id': result.id,
+								'show_route': 'app_result_show',
+								'edit_route': 'app_result_edit'
+							} %}
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="3">Pas de résultat.</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 
 	<a href="{{ path('app_result_new') }}">Créer un nouveau résultat pour un test</a>
 {% endblock %}
