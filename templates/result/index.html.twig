@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Resultats
+{% endblock %}
+
+{% block body %}
+	<h1>Liste des résultats</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Observation</th>
+				<th>Test</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for result in results %}
+				<tr>
+					<td>{{ result.id }}</td>
+					<td>{{ result.observation }}</td>
+					<td>{{ result.test }}</td>
+					<td>
+						<a href="{{ path('app_result_show', {'id': result.id}) }}">Voir</a>
+						<a href="{{ path('app_result_edit', {'id': result.id}) }}">Editer</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="3">Pas de résultat.</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_result_new') }}">Créer un nouveau résultat pour un test</a>
+{% endblock %}

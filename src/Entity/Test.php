@@ -31,9 +31,17 @@ class Test
     #[ORM\ManyToMany(targetEntity: Equipment::class, inversedBy: 'tests')]
     private Collection $equipments;
 
+    #[ORM\OneToOne(mappedBy: 'test', cascade: ['persist', 'remove'])]
+    private ?Result $result = null;
+
     public function __construct()
     {
         $this->equipments = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 
     public function getId(): ?int
@@ -97,6 +105,28 @@ class Test
     public function removeEquipment(Equipment $equipment): static
     {
         $this->equipments->removeElement($equipment);
+
+        return $this;
+    }
+
+    public function getResult(): ?Result
+    {
+        return $this->result;
+    }
+
+    public function setResult(?Result $result): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($result === null && $this->result !== null) {
+            $this->result->setTest(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($result !== null && $result->getTest() !== $this) {
+            $result->setTest($this);
+        }
+
+        $this->result = $result;
 
         return $this;
     }
