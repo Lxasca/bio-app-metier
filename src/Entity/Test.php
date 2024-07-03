@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TestRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,6 +24,17 @@ class Test
 
     #[ORM\ManyToOne(inversedBy: 'tests')]
     private ?Sample $sample = null;
+
+    /**
+     * @var Collection<int, Equipment>
+     */
+    #[ORM\ManyToMany(targetEntity: Equipment::class, inversedBy: 'tests')]
+    private Collection $equipments;
+
+    public function __construct()
+    {
+        $this->equipments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -60,6 +73,30 @@ class Test
     public function setSample(?Sample $sample): static
     {
         $this->sample = $sample;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Equipment>
+     */
+    public function getEquipments(): Collection
+    {
+        return $this->equipments;
+    }
+
+    public function addEquipment(Equipment $equipment): static
+    {
+        if (!$this->equipments->contains($equipment)) {
+            $this->equipments->add($equipment);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipment(Equipment $equipment): static
+    {
+        $this->equipments->removeElement($equipment);
 
         return $this;
     }

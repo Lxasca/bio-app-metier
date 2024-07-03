@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Equipment;
 use App\Entity\Sample;
 use App\Entity\Test;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -19,6 +20,12 @@ class TestType extends AbstractType
             ->add('scenario')
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer l\'échantillon'
+            ])
+            ->add('equipments', EntityType::class, [
+                'class' => Equipment::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
             ])
         ;
     }
