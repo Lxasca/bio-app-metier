@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipement
+{% endblock %}
+
+{% block body %}
+	<h1>Liste des équipement</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nom</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for equipment in equipment %}
+				<tr>
+					<td>{{ equipment.id }}</td>
+					<td>{{ equipment.name }}</td>
+					<td>
+						<a href="{{ path('app_equipment_show', {'id': equipment.id}) }}">Voir</a>
+						<a href="{{ path('app_equipment_edit', {'id': equipment.id}) }}">Editer</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="3">Pas d'équipement.</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_equipment_new') }}">Créer un nouvel équipement</a>
+{% endblock %}
