@@ -14,22 +14,32 @@
 		<table class="table">
 			<thead>
 				<tr>
+					<th></th>
 					<th>Nom</th>
 					<th>Période</th>
-					<th>Statut</th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for project in projects %}
 					<tr>
+						<td>
+							<span>
+								{% if project.status == constant('App\\Enum\\ProjectStatus::OK') %}
+									<i class="fas fa-check"></i>
+								{% elseif project.status == constant('App\\Enum\\ProjectStatus::EN_COURS') %}
+									<i class="fas fa-spinner"></i>
+								{% else %}
+									<i class="fas fa-xmark"></i>
+								{% endif %}
+							</span>
+						</td>
 						<td>{{ project.name }}</td>
 						<td>
 							{{ project.startDate ? project.startDate|date('d/m/Y') : '' }}
 							-
 							{{ project.endDate ? project.endDate|date('d/m/Y') : '' }}
 						</td>
-						<td>{{ project.status }}</td>
 						<td>
 							{% include '_partials/_partials_table_actions.html.twig' with {
 								'entity_type': 'project',

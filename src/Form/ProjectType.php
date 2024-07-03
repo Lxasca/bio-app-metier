@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Project;
+use App\Enum\ProjectStatus;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -37,8 +38,13 @@ class ProjectType extends AbstractType
             ->add('status', ChoiceType::class, [
                 'label' => 'Statut',
                 'choices' => [
-                    'Ok' => 1
+                    'Ok' => ProjectStatus::OK,
+                    'En cours' => ProjectStatus::EN_COURS,
+                    'Pas commencé' => ProjectStatus::PAS_COMMENCE,
                 ],
+                'choice_value' => function ($choice) {
+                    return $choice;
+                },
                 'multiple' => false,
                 'required' => false
             ])

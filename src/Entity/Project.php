@@ -28,14 +28,14 @@ class Project
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $endDate = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $status = null;
-
     /**
      * @var Collection<int, Sample>
      */
     #[ORM\OneToMany(targetEntity: Sample::class, mappedBy: 'project')]
     private Collection $samples;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $status = null;
 
     public function __construct()
     {
@@ -95,18 +95,6 @@ class Project
         return $this;
     }
 
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(?string $status): static
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Sample>
      */
@@ -133,6 +121,18 @@ class Project
                 $sample->setProject(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?int $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }
