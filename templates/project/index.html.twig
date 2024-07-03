@@ -4,44 +4,52 @@
 {% endblock %}
 
 {% block body %}
-	{% include "/_partials/section-app-user.html.twig" %}
+	<h4>
+		<i class="fas fa-align-right me-3"></i>
+		Liste des projets
+	</h4>
+	<br>
 
-	<h1>Liste des projets</h1>
+	<div class="container-table">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Période</th>
+					<th>Statut</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for project in projects %}
+					<tr>
+						<td>{{ project.name }}</td>
+						<td>
+							{{ project.startDate ? project.startDate|date('d/m/Y') : '' }}
+							-
+							{{ project.endDate ? project.endDate|date('d/m/Y') : '' }}
+						</td>
+						<td>{{ project.status }}</td>
+						<td>
+							{% include '_partials/_partials_table_actions.html.twig' with {
+								'entity_type': 'project',
+								'entity_id': project.id,
+								'show_route': 'app_project_show',
+								'edit_route': 'app_project_edit'
+							} %}
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Nom</th>
-				<th>Description</th>
-				<th>Date de début</th>
-				<th>Date de fin</th>
-				<th>Statut</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for project in projects %}
-				<tr>
-					<td>{{ project.id }}</td>
-					<td>{{ project.name }}</td>
-					<td>{{ project.description }}</td>
-					<td>{{ project.startDate ? project.startDate|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ project.endDate ? project.endDate|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ project.status }}</td>
-					<td>
-						<a href="{{ path('app_project_show', {'id': project.id}) }}">Voir</a>
-						<a href="{{ path('app_project_edit', {'id': project.id}) }}">Editer</a>
-						<a href="{{ path('app_sample_new', {'id': project.id}) }}">Ajouter un échantillon</a>
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="7">Il n'y a pas encore de projet.</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+
+							<a href="{{ path('app_sample_new', {'id': project.id}) }}">Ajouter un échantillon</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="7">Il n'y a pas encore de projet.</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 
 	<a href="{{ path('app_project_new') }}">Créer un nouveau projet</a>
 {% endblock %}
