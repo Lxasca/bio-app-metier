@@ -1,6 +1,6 @@
 <!-- Navbar -->
 <nav
-	class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+	class="navbar navbar-expand-lg shadow-none">
 	<!-- Container wrapper -->
 	<div
 		class="container">
@@ -11,22 +11,52 @@
 			<!-- Left links -->
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item">
-					<a class="nav-link" href="#">Dashboard</a>
+					<a class="nav-link text-dark {{ app.request.attributes.get('_route') == 'app_home' ? 'fw-bold' }}" href="{{ path('app_home') }}">Accueil</a>
 				</li>
+				{% if app.user %}
+					<li class="nav-item">
+						<a class="nav-link text-dark {{ app.request.attributes.get('_route') starts with 'app_project' ? 'fw-bold' }}" href="{{ path('app_project_index')}}">
+							Aller à la partie projet
+						</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link text-dark {{ app.request.attributes.get('_route') starts with 'app_sample' ? 'fw-bold' }}" href="{{ path('app_sample_index')}}">
+							Aller à la partie échantillon
+						</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link text-dark {{ app.request.attributes.get('_route') starts with 'app_test' ? 'fw-bold' }}" href="{{ path('app_test_index')}}">
+							Aller à la partie des tests sur échantillons
+						</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link text-dark {{ app.request.attributes.get('_route') starts with 'app_equipment' ? 'fw-bold' }}" href="{{ path('app_equipment_index')}}">
+							Aller à la partie des équipements
+						</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link text-dark {{ app.request.attributes.get('_route') starts with 'app_result' ? 'fw-bold' }}" href="{{ path('app_result_index')}}">
+							Aller à la partie des résultats
+						</a>
+					</li>
+				{% endif %}
 			</ul>
 			<!-- Left links -->
 
 			<div class="d-flex align-items-center">
 
-
 				{% if app.user %}
-					<a data-mdb-ripple-init class="btn btn-dark px-3" href="{{ path('app_account')}}" role="button">
+					<a data-mdb-ripple-init class="btn btn-light shadow px-3 mx-3" href="{{ path('app_account')}}" role="button">
 						<i class="fas fa-user"></i>
 					</a>
+					<a data-mdb-ripple-init class="btn btn-dark px-3" role="button" href="{{ path('app_logout')}}">
+						<i class="fas fa-arrow-right-to-bracket"></i>
+					</a>
 				{% else %}
-					<button data-mdb-ripple-init class="btn btn-dark me-3" role="button" href="{{ path('app_register')}}">
-						S'inscrire
-					</button>
 					<a data-mdb-ripple-init class="btn btn-dark px-3" role="button" href="{{ path('app_login')}}">
 						<i class="fas fa-arrow-right-to-bracket"></i>
 					</a>
