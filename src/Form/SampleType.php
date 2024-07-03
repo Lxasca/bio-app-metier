@@ -40,10 +40,6 @@ class SampleType extends AbstractType
                     'Complété' => 2,
                 ]
             ])
-           /**->add('project', EntityType::class, [
-                'class' => Project::class,
-                'choice_label' => 'id',
-            ])**/
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer l\'échantillon'
             ])

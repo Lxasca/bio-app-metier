@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SampleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +30,17 @@ class Sample
 
     #[ORM\ManyToOne(inversedBy: 'samples')]
     private ?Project $project = null;
+
+    /**
+     * @var Collection<int, Test>
+     */
+    #[ORM\OneToMany(targetEntity: Test::class, mappedBy: 'sample')]
+    private Collection $tests;
+
+    public function __construct()
+    {
+        $this->tests = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +103,36 @@ class Sample
     public function setProject(?Project $project): static
     {
         $this->project = $project;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Test>
+     */
+    public function getTests(): Collection
+    {
+        return $this->tests;
+    }
+
+    public function addTest(Test $test): static
+    {
+        if (!$this->tests->contains($test)) {
+            $this->tests->add($test);
+            $test->setSample($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTest(Test $test): static
+    {
+        if ($this->tests->removeElement($test)) {
+            // set the owning side to null (unless already changed)
+            if ($test->getSample() === $this) {
+                $test->setSample(null);
+            }
+        }
 
         return $this;
     }

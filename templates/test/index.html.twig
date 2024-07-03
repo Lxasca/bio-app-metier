@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Test index
+{% endblock %}
+
+{% block body %}
+	<h1>Test index</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Titre</th>
+				<th>Scenario</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for test in tests %}
+				<tr>
+					<td>{{ test.id }}</td>
+					<td>{{ test.title }}</td>
+					<td>{{ test.scenario }}</td>
+					<td>
+						<a href="{{ path('app_test_show', {'id': test.id}) }}">Voir</a>
+						<a href="{{ path('app_test_edit', {'id': test.id}) }}">Editer</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="4">Pas de test.</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_test_new') }}">Créer un nouveau test</a>
+{% endblock %}
