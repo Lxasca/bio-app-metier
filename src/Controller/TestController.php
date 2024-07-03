@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Sample;
 use App\Entity\Test;
 use App\Form\TestType;
 use App\Repository\TestRepository;
@@ -22,25 +23,33 @@ class TestController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_test_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $test = new Test();
-        $form = $this->createForm(TestType::class, $test);
-        $form->handleRequest($request);
+    #[Route('/new/{sampleId}', name: 'app_test_new', methods: ['GET', 'POST'])]
+public function new(int $sampleId, Request $request, EntityManagerInterface $entityManager): Response
+{
+    $sample = $entityManager->getRepository(Sample::class)->find($sampleId);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($test);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_test_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('test/new.html.twig', [
-            'test' => $test,
-            'form' => $form,
-        ]);
+    if (!$sample) {
+        throw $this->createNotFoundException('No sample found for id ' . $sampleId);
     }
+
+    $test = new Test();
+    $test->setSample($sample);
+
+    $form = $this->createForm(TestType::class, $test);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $entityManager->persist($test);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_test_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    return $this->render('test/new.html.twig', [
+        'test' => $test,
+        'form' => $form->createView(),
+    ]);
+}
 
     #[Route('/{id}', name: 'app_test_show', methods: ['GET'])]
     public function show(Test $test): Response

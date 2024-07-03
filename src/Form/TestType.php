@@ -17,10 +17,6 @@ class TestType extends AbstractType
         $builder
             ->add('title')
             ->add('scenario')
-            ->add('sample', EntityType::class, [
-                'class' => Sample::class,
-                'choice_label' => 'id',
-            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer l\'échantillon'
             ])

@@ -30,6 +30,7 @@
 					<td>
 						<a href="{{ path('app_sample_show', {'id': sample.id}) }}">Voir</a>
 						<a href="{{ path('app_sample_edit', {'id': sample.id}) }}">Editer</a>
+						<a href="{{ path('app_test_new', {'sampleId': sample.id}) }}">Créer un test</a>
 					</td>
 				</tr>
 			{% else %}

@@ -12,6 +12,7 @@
 				<th>Id</th>
 				<th>Titre</th>
 				<th>Scenario</th>
+				<th>Echantillon</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -21,6 +22,7 @@
 					<td>{{ test.id }}</td>
 					<td>{{ test.title }}</td>
 					<td>{{ test.scenario }}</td>
+					<td>{{ test.sample }}</td>
 					<td>
 						<a href="{{ path('app_test_show', {'id': test.id}) }}">Voir</a>
 						<a href="{{ path('app_test_edit', {'id': test.id}) }}">Editer</a>
@@ -33,6 +35,4 @@
 			{% endfor %}
 		</tbody>
 	</table>
-
-	<a href="{{ path('app_test_new') }}">Créer un nouveau test</a>
 {% endblock %}
