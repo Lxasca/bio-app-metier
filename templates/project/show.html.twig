@@ -4,41 +4,37 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Projet</h1>
-	{% include '_partials/_partials_table_edit.html.twig' with {
-		'entity_type': 'project',
-		'entity_id': project.id,
-		'edit_route': 'app_project_edit'
-	} %}
+	<h4 class="text-center">Projet</h4>
 
-	<table class="table">
-		<tbody>
-			<tr>
-				<th>Id</th>
-				<td>{{ project.id }}</td>
-			</tr>
-			<tr>
-				<th>Nom</th>
-				<td>{{ project.name }}</td>
-			</tr>
-			<tr>
-				<th>Description</th>
-				<td>{{ project.description }}</td>
-			</tr>
-			<tr>
-				<th>Date de début</th>
-				<td>{{ project.startDate ? project.startDate|date('Y-m-d H:i:s') : '' }}</td>
-			</tr>
-			<tr>
-				<th>Date de fin</th>
-				<td>{{ project.endDate ? project.endDate|date('Y-m-d H:i:s') : '' }}</td>
-			</tr>
-			<tr>
-				<th>Statut</th>
-				<td>{{ project.status }}</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="container-table">
+		<p>
+			Du
+			{{ project.startDate ? project.startDate|date('d/m/Y') : '' }}
+			au
+			{{ project.endDate ? project.endDate|date('d/m/Y') : '' }}
+		</p>
+		<p class="fw-bold">
+			<span class="me-2">
+				{% if project.status == constant('App\\Enum\\ProjectStatus::OK') %}
+					<i class="fas fa-check"></i>
+				{% elseif project.status == constant('App\\Enum\\ProjectStatus::EN_COURS') %}
+					<i class="fas fa-spinner"></i>
+				{% else %}
+					<i class="fas fa-xmark"></i>
+				{% endif %}
+			</span>
+
+			{{ project.name }}
+		</p>
+		<p>{{ project.description }}</p>
+
+
+		{% include '_partials/_partials_table_edit.html.twig' with {
+			'entity_type': 'project',
+			'entity_id': project.id,
+			'edit_route': 'app_project_edit'
+		} %}
+	</div>
 
 	<section>
 		<h3>Les échantillons du projet</h3>

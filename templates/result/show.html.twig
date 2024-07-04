@@ -4,25 +4,19 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Resultat</h1>
-	{% include '_partials/_partials_table_edit.html.twig' with {
-		'entity_type': 'result',
-		'entity_id': result.id,
-		'edit_route': 'app_result_edit'
-	} %}
+	<h4 class="text-center">Resultat</h4>
 
-	<table class="table">
-		<tbody>
-			<tr>
-				<th>Id</th>
-				<td>{{ result.id }}</td>
-			</tr>
-			<tr>
-				<th>Observation</th>
-				<td>{{ result.observation }}</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="container-table">
+		<p>
+			{{ result.observation }}
+		</p>
+
+		{% include '_partials/_partials_table_edit.html.twig' with {
+			'entity_type': 'result',
+			'entity_id': result.id,
+			'edit_route': 'app_result_edit'
+		} %}
+	</div>
 
 	<a href="{{ path('app_result_index') }}">Retourner à la liste des résultats</a>
 

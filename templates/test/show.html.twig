@@ -4,29 +4,22 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Test</h1>
-	{% include '_partials/_partials_table_edit.html.twig' with {
-		'entity_type': 'test',
-		'entity_id': test.id,
-		'edit_route': 'app_test_edit'
-	} %}
+	<h4 class="text-center">Test</h4>
 
-	<table class="table">
-		<tbody>
-			<tr>
-				<th>Id</th>
-				<td>{{ test.id }}</td>
-			</tr>
-			<tr>
-				<th>Titre</th>
-				<td>{{ test.title }}</td>
-			</tr>
-			<tr>
-				<th>Scenario</th>
-				<td>{{ test.scenario }}</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="container-table">
+		<p>
+			{{ test.title }}
+		</p>
+		<p>
+			{{ test.scenario }}
+		</p>
+
+		{% include '_partials/_partials_table_edit.html.twig' with {
+			'entity_type': 'test',
+			'entity_id': test.id,
+			'edit_route': 'app_test_edit'
+		} %}
+	</div>
 
 	<a href="{{ path('app_test_index') }}">Retourner à la liste des tests</a>
 
