@@ -17,6 +17,7 @@
 					<th>Nom</th>
 					<th>Période</th>
 					<th></th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -40,16 +41,16 @@
 							{{ project.endDate ? project.endDate|date('d/m/Y') : '' }}
 						</td>
 						<td>
-							{% include '_partials/_partials_table_actions.html.twig' with {
+							<a class="btn btn-dark btn-rounded btn-add" data-mdb-tooltip-init title="Créer un échantillon" href="{{ path('app_sample_new', {'id': project.id}) }}">
+								+
+							</a>
+						</td>
+						<td>
+							{% include '_partials/_partials_table_show.html.twig' with {
 								'entity_type': 'project',
 								'entity_id': project.id,
-								'show_route': 'app_project_show',
-								'edit_route': 'app_project_edit'
-							} %}
-
-
-							<a href="{{ path('app_sample_new', {'id': project.id}) }}">Ajouter un échantillon</a>
-						</td>
+								'show_route': 'app_project_show'
+							} %}</td>
 					</tr>
 				{% else %}
 					<tr>

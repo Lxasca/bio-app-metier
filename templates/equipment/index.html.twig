@@ -10,33 +10,28 @@
 	</h4>
 
 	<div class="container-table">
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Nom</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
+		<div>
+			<div class="row row-cols-1 row-cols-md-3 g-4">
 				{% for equipment in equipment %}
-					<tr>
-						<td>{{ equipment.name }}</td>
-						<td>
-							{% include '_partials/_partials_table_actions.html.twig' with {
+					<div class="col">
+						<div class="card h-100">
+							<div class="card-body">
+								<h5 class="card-title">{{ equipment.name }}</h5>
+								<p class="card-text text-end">
+									{% include '_partials/_partials_table_show.html.twig' with {
 								'entity_type': 'equipment',
 								'entity_id': equipment.id,
-								'show_route': 'app_equipment_show',
-								'edit_route': 'app_equipment_edit'
+								'show_route': 'app_equipment_show'
 							} %}
-						</td>
-					</tr>
+								</p>
+							</div>
+						</div>
+					</div>
 				{% else %}
-					<tr>
-						<td colspan="3">Pas d'équipement.</td>
-					</tr>
+					<p>Pas d'équipement.</p>
 				{% endfor %}
-			</tbody>
-		</table>
+			</div>
+		</div>
 	</div>
 
 	<a href="{{ path('app_equipment_new') }}">Créer un nouvel équipement</a>

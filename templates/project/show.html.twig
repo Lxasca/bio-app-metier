@@ -5,6 +5,11 @@
 
 {% block body %}
 	<h1>Projet</h1>
+	{% include '_partials/_partials_table_edit.html.twig' with {
+		'entity_type': 'project',
+		'entity_id': project.id,
+		'edit_route': 'app_project_edit'
+	} %}
 
 	<table class="table">
 		<tbody>

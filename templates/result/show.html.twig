@@ -5,6 +5,11 @@
 
 {% block body %}
 	<h1>Resultat</h1>
+	{% include '_partials/_partials_table_edit.html.twig' with {
+		'entity_type': 'result',
+		'entity_id': result.id,
+		'edit_route': 'app_result_edit'
+	} %}
 
 	<table class="table">
 		<tbody>

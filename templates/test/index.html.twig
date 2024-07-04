@@ -31,11 +31,10 @@
 							{% endif %}
 						</td>
 						<td>
-							{% include '_partials/_partials_table_actions.html.twig' with {
+							{% include '_partials/_partials_table_show.html.twig' with {
 								'entity_type': 'test',
 								'entity_id': test.id,
-								'show_route': 'app_test_show',
-								'edit_route': 'app_test_edit'
+								'show_route': 'app_test_show'
 							} %}
 						</td>
 					</tr>

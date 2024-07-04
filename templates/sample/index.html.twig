@@ -19,6 +19,7 @@
 					<th>Date de collecte</th>
 					<th>Projet</th>
 					<th></th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -40,13 +41,16 @@
 						</td>
 
 						<td>
-							{% include '_partials/_partials_table_actions.html.twig' with {
+							<a class="btn btn-dark btn-rounded btn-add" data-mdb-tooltip-init title="Créer un test" href="{{ path('app_test_new', {'sampleId': sample.id}) }}">
+								+
+							</a>
+						</td>
+						<td>
+							{% include '_partials/_partials_table_show.html.twig' with {
 								'entity_type': 'sample',
 								'entity_id': sample.id,
-								'show_route': 'app_sample_show',
-								'edit_route': 'app_sample_edit'
+								'show_route': 'app_sample_show'
 							} %}
-							<a href="{{ path('app_test_new', {'sampleId': sample.id}) }}">Créer un test</a>
 						</td>
 					</tr>
 				{% else %}
