@@ -1,8 +1,24 @@
 {{ form_start(form) }}
-{{ form_row(form.name) }}
+
+<div class="d-flex">
+	<span class="me-3">Du</span>
+	{{ form_row(form.startDate) }}
+	<span class="mx-3">au</span>
+	{{ form_row(form.endDate) }}
+</div>
+
+<div class="d-flex">
+	{{ form_row(form.status) }}
+	<div class="ms-3">
+		{{ form_row(form.name) }}
+	</div>
+</div>
+
 {{ form_row(form.description) }}
-{{ form_row(form.startDate) }}
-{{ form_row(form.endDate) }}
-{{ form_row(form.status) }}
-{{ form_row(form.submit) }}
+
+
+<section class="d-flex justify-content-end">
+	{{ form_row(form.submit) }}
+</section>
+
 {{ form_end(form) }}

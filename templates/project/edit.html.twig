@@ -4,9 +4,11 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Editer un projet</h1>
+	<h4 class="text-center">Editer un projet</h4>
 
-	{{ include('project/_form.html.twig') }}
+	<div class="container-table">
+		{{ include('project/_form.html.twig') }}
+	</div>
 
 	<a href="{{ path('app_project_index') }}">Retourner à la liste des projets</a>
 

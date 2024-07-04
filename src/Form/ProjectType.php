@@ -18,25 +18,37 @@ class ProjectType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nom',
-                'required' => false
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ]
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description',
-                'required' => false
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ]
             ])
             ->add('startDate', null, [
-                'label' => 'Date de début',
+                'label' => false,
                 'widget' => 'single_text',
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ]
             ])
             ->add('endDate', null, [
-                'label' => 'Date de fin',
+                'label' => false,
                 'widget' => 'single_text',
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ]
             ])
             ->add('status', ChoiceType::class, [
-                'label' => 'Statut',
+                'label' => false,
                 'choices' => [
                     'Ok' => ProjectStatus::OK,
                     'En cours' => ProjectStatus::EN_COURS,
@@ -46,10 +58,16 @@ class ProjectType extends AbstractType
                     return $choice;
                 },
                 'multiple' => false,
-                'required' => false
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ]
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Enregistrer le projet'
+                'label' => 'Enregistrer',
+                'attr' => [
+                    'class' => 'btn btn-rounded btn-light shadow mt-3'
+                ]
             ])
         ;
     }
