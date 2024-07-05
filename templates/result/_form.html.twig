@@ -1,3 +1,12 @@
 {{ form_start(form) }}
-{{ form_widget(form) }}
+
+<div class="col-3">
+	{{ form_row(form.test) }}
+</div>
+{{ form_row(form.observation) }}
+
+<section class="d-flex justify-content-end">
+	{{ form_row(form.submit) }}
+</section>
+
 {{ form_end(form) }}

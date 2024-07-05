@@ -1,12 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Editer le result
+{% block title %}Editer le resultat
 {% endblock %}
 
 {% block body %}
-	<h1>Editer le result</h1>
+	<h4 class="text-center">Editer le resultat</h4>
 
-	{{ include('result/_form.html.twig') }}
+	<div class="container-table">
+		{{ include('result/_form.html.twig') }}
+	</div>
 
 	<a href="{{ path('app_result_index') }}">Retourner à la liste des résultats</a>
 
