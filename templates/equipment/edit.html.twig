@@ -4,9 +4,11 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Editer l'équipement</h1>
+	<h4 class="text-center">Editer l'équipement</h4>
 
-	{{ include('equipment/_form.html.twig') }}
+	<div class="container-table">
+		{{ include('equipment/_form.html.twig') }}
+	</div>
 
 	<a href="{{ path('app_equipment_index') }}">Retourner à la liste des équipements</a>
 

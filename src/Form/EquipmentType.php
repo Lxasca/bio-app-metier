@@ -17,10 +17,16 @@ class EquipmentType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nom'
+                'label' => false,
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ]
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Enregistrer l\'équipment'
+                'label' => 'Enregistrer',
+                'attr' => [
+                    'class' => 'btn btn-rounded btn-light shadow mt-3'
+                ]
             ])
         ;
     }
