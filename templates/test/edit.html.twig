@@ -4,9 +4,11 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Editer un test</h1>
+	<h4 class="text-center">Editer un test</h4>
 
-	{{ include('test/_form.html.twig') }}
+	<div class="container-table">
+		{{ include('test/_form.html.twig') }}
+	</div>
 
 	<a href="{{ path('app_test_index') }}">Retourner à la liste des tests</a>
 

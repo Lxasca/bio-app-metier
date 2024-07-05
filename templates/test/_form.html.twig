@@ -1,3 +1,18 @@
 {{ form_start(form) }}
-{{ form_widget(form) }}
+
+{{ form_row(form.title) }}
+{{ form_row(form.scenario) }}
+
+<div class="form-checkbox-group">
+	{% for choice in form.equipments %}
+		<div class="form-checkbox-item">
+			{{ form_widget(choice) }}
+			{{ form_label(choice) }}
+		</div>
+	{% endfor %}
+</div>
+
+<section class="d-flex justify-content-end">
+	{{ form_row(form.submit) }}
+</section>
 {{ form_end(form) }}
