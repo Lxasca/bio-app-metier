@@ -8,14 +8,16 @@
 
 	<div class="container-table">
 		<p>
-			Collecté le
+			{{ sample.status }}
+			| Collecté le
 			{{ sample.collectionDate ? sample.collectionDate|date('d/m/Y') : '' }}
+		</p>
+
+		<p>
+			{{ sample.type }}
 		</p>
 		<p>
 			{{ sample.source }}
-		</p>
-		<p>
-			{{ sample.status }}
 		</p>
 
 		{% include '_partials/_partials_table_edit.html.twig' with {

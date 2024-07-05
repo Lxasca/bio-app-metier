@@ -18,30 +18,45 @@ class SampleType extends AbstractType
     {
         $builder
             ->add('type', TextType::class, [
-                'label' => 'Type'
+                'label' => false,
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ]
             ])
             ->add('source', ChoiceType::class, [
-                'label' => 'Type',
+                'label' => false,
                 'choices' => [
                     'Eau' => 0,
                     'Air' => 1,
                     'Aliments' => 2,
+                ],
+                'attr' => [
+                    'class' => 'form-control mb-3'
                 ]
             ])
             ->add('collectionDate', null, [
-                'label' => 'Date de prélèvement',
+                'label' => false,
                 'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ]
             ])
             ->add('status', ChoiceType::class, [
-                'label' => 'Type',
+                'label' => false,
                 'choices' => [
                     'En attente' => 0,
                     'En cours d\'analyse' => 1,
                     'Complété' => 2,
+                ],
+                'attr' => [
+                    'class' => 'form-control mb-3'
                 ]
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Enregistrer l\'échantillon'
+                'label' => 'Enregistrer',
+                'attr' => [
+                    'class' => 'btn btn-rounded btn-light shadow mt-3'
+                ]
             ])
         ;
     }

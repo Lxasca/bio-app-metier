@@ -8,14 +8,17 @@
 </div>
 
 <div class="d-flex">
-	{{ form_row(form.status) }}
-	<div class="ms-3">
-		{{ form_row(form.name) }}
+	<div class="col-2">
+		{{ form_row(form.status) }}
+	</div>
+	<div class="ms-3 col-6">
+		<div>
+			{{ form_row(form.name) }}
+		</div>
 	</div>
 </div>
 
 {{ form_row(form.description) }}
-
 
 <section class="d-flex justify-content-end">
 	{{ form_row(form.submit) }}

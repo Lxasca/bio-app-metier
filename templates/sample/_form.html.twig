@@ -1,3 +1,22 @@
 {{ form_start(form) }}
-{{ form_widget(form) }}
+
+<div class="d-flex">
+	{{ form_row(form.status) }}
+
+	<span class="mx-3">
+		{{ form_row(form.collectionDate) }}
+	</span>
+</div>
+
+<div class="col-4">
+	{{ form_row(form.type) }}
+</div>
+<div class="col-4">
+	{{ form_row(form.source) }}
+</div>
+
+<section class="d-flex justify-content-end">
+	{{ form_row(form.submit) }}
+</section>
+
 {{ form_end(form) }}

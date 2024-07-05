@@ -4,9 +4,11 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Editer un échantillon</h1>
+	<h4 class="text-center">Editer un échantillon</h4>
 
-	{{ include('sample/_form.html.twig') }}
+	<div class="container-table">
+		{{ include('sample/_form.html.twig') }}
+	</div>
 
 	<a href="{{ path('app_sample_index') }}">Retourner à la liste des échantillons</a>
 
