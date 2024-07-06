@@ -17,6 +17,9 @@
 
 <section class="d-flex justify-content-end">
 	{{ form_row(form.submit) }}
+	{% if isCreate is defined and not isCreate  %}
+		{{ include('sample/_delete_form.html.twig') }}
+	{% endif %}
 </section>
 
 {{ form_end(form) }}

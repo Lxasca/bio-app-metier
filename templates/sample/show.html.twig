@@ -27,9 +27,5 @@
 		} %}
 	</div>
 
-	<a href="{{ path('app_sample_index') }}">Retourner à la liste des échantillons</a>
-
-	<a href="{{ path('app_sample_edit', {'id': sample.id}) }}">Editer</a>
-
 	{{ include('sample/_delete_form.html.twig') }}
 {% endblock %}

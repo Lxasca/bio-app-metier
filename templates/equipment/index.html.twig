@@ -9,6 +9,10 @@
 		Liste des équipements
 	</h4>
 
+	<section class="mb-4 text-end">
+		<a class="btn btn-dark" href="{{ path('app_equipment_new') }}">Créer un nouvel équipement</a>
+	</section>
+
 	<div class="container-table">
 		<div>
 			<div class="row row-cols-1 row-cols-md-3 g-4">
@@ -33,6 +37,4 @@
 			</div>
 		</div>
 	</div>
-
-	<a href="{{ path('app_equipment_new') }}">Créer un nouvel équipement</a>
 {% endblock %}

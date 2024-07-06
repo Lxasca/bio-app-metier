@@ -9,6 +9,10 @@
 		Liste des résultats
 	</h4>
 
+	<section class="mb-4 text-end">
+		<a class="btn btn-dark" href="{{ path('app_result_new') }}">Créer un nouveau résultat</a>
+	</section>
+
 	<div class="container-table">
 		<table class="table">
 			<thead>
@@ -46,6 +50,4 @@
 			</tbody>
 		</table>
 	</div>
-
-	<a href="{{ path('app_result_new') }}">Créer un nouveau résultat pour un test</a>
 {% endblock %}

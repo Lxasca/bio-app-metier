@@ -50,9 +50,5 @@
 		{% endfor %}
 	</section>
 
-	<a href="{{ path('app_project_index') }}">Retourner à la liste des projets</a>
-
-	<a href="{{ path('app_project_edit', {'id': project.id}) }}">Editer</a>
-
 	{{ include('project/_delete_form.html.twig') }}
 {% endblock %}

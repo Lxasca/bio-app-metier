@@ -48,6 +48,7 @@ public function new(int $sampleId, Request $request, EntityManagerInterface $ent
     return $this->render('test/new.html.twig', [
         'test' => $test,
         'form' => $form->createView(),
+        'isCreate' => true
     ]);
 }
 

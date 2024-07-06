@@ -46,6 +46,7 @@ class SampleController extends AbstractController
         return $this->render('sample/new.html.twig', [
             'sample' => $sample,
             'form' => $form,
+            'isCreate' => true
         ]);
     }
 
