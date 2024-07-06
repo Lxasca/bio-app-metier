@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Project
+{% block title %}Nouveau Projet
 {% endblock %}
 
 {% block body %}
-	<h1>Créer un nouveau projet</h1>
+	<h4 class="text-center">Créer un projet</h4>
 
-	{{ include('project/_form.html.twig') }}
+	<div class="container-table">
+		{{ include('project/_form.html.twig') }}
+	</div>
 {% endblock %}

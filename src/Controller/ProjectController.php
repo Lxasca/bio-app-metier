@@ -70,6 +70,7 @@ class ProjectController extends AbstractController
         return $this->render('project/edit.html.twig', [
             'project' => $project,
             'form' => $form,
+            //'isCreate' => false
         ]);
     }
 

@@ -39,6 +39,7 @@ class EquipmentController extends AbstractController
         return $this->render('equipment/new.html.twig', [
             'equipment' => $equipment,
             'form' => $form,
+            'isCreate' => true
         ]);
     }
 

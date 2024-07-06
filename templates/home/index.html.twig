@@ -6,5 +6,23 @@
 {% block body %}
 	<div>
 		<h1>Accueil</h1>
+
+		{% if app.user %}
+			Pour tester l'app, rendez-vous dans les onglets
+			<a href="{{ path('app_project_index')}}">Projet</a>,
+			<a href="{{ path('app_sample_index')}}">Echantillon</a>,
+			<a href="{{ path('app_test_index')}}">Test</a>,
+			<a href="{{ path('app_equipment_index')}}">Equipement</a>
+			et
+			<a href="{{ path('app_result_index')}}">Résultat</a>.
+		{% else %}
+			Pour tester l'app,
+			<a href="{{ path('app_login')}}">connectez-vous avec les identifiants :
+			</a>
+			<ul>
+				<li>Email : test@mail.fr</li>
+				<li>Mot de passe : motdepasse</li>
+			</ul>
+		{% endif %}
 	</div>
 {% endblock %}
