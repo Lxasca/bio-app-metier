@@ -2,24 +2,33 @@
 
 namespace App\Controller;
 
-use App\Entity\Sample;
 use App\Entity\Test;
+use App\Entity\Sample;
 use App\Form\TestType;
 use App\Repository\TestRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/test')]
 class TestController extends AbstractController
 {
     #[Route('/', name: 'app_test_index', methods: ['GET'])]
-    public function index(TestRepository $testRepository): Response
+    public function index(TestRepository $testRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $query = $testRepository->findAll();
+
+        $tests = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            5
+        );
+
         return $this->render('test/index.html.twig', [
-            'tests' => $testRepository->findAll(),
+            'tests' => $tests
         ]);
     }
 

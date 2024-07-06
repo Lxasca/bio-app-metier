@@ -49,5 +49,7 @@
 				{% endfor %}
 			</tbody>
 		</table>
+
+		{% include "/_partials/_partials_knp_pagination_render.html.twig" with { 'render': results } %}
 	</div>
 {% endblock %}

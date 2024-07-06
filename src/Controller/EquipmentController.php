@@ -6,19 +6,28 @@ use App\Entity\Equipment;
 use App\Form\EquipmentType;
 use App\Repository\EquipmentRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/equipment')]
 class EquipmentController extends AbstractController
 {
     #[Route('/', name: 'app_equipment_index', methods: ['GET'])]
-    public function index(EquipmentRepository $equipmentRepository): Response
+    public function index(EquipmentRepository $equipmentRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $query = $equipmentRepository->findAll();
+
+        $equipments = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            6
+        );
+
         return $this->render('equipment/index.html.twig', [
-            'equipment' => $equipmentRepository->findAll(),
+            'equipments' => $equipments,
         ]);
     }
 

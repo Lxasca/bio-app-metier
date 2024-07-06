@@ -6,19 +6,28 @@ use App\Entity\Result;
 use App\Form\ResultType;
 use App\Repository\ResultRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/result')]
 class ResultController extends AbstractController
 {
     #[Route('/', name: 'app_result_index', methods: ['GET'])]
-    public function index(ResultRepository $resultRepository): Response
+    public function index(ResultRepository $resultRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $query = $resultRepository->findAll();
+
+        $results = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            5
+        );
+
         return $this->render('result/index.html.twig', [
-            'results' => $resultRepository->findAll(),
+            'results' => $results,
         ]);
     }
 

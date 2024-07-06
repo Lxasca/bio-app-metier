@@ -16,7 +16,7 @@
 	<div class="container-table">
 		<div>
 			<div class="row row-cols-1 row-cols-md-3 g-4">
-				{% for equipment in equipment %}
+				{% for equipment in equipments %}
 					<div class="col">
 						<div class="card h-100">
 							<div class="card-body">
@@ -36,5 +36,8 @@
 				{% endfor %}
 			</div>
 		</div>
+
+		{% include "/_partials/_partials_knp_pagination_render.html.twig" with { 'render': equipments } %}
+
 	</div>
 {% endblock %}

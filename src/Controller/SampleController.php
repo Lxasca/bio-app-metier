@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class SampleController extends AbstractController
 {
     #[Route('/', name: 'app_sample_index', methods: ['GET'])]
-    public function index(SampleRepository $sampleRepository,PaginatorInterface $paginator, Request $request): Response
+    public function index(SampleRepository $sampleRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $query = $sampleRepository->findAll();
 
