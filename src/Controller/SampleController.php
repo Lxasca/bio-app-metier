@@ -7,6 +7,7 @@ use App\Entity\Sample;
 use App\Form\SampleType;
 use App\Repository\SampleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,10 +17,18 @@ use Symfony\Component\Routing\Attribute\Route;
 class SampleController extends AbstractController
 {
     #[Route('/', name: 'app_sample_index', methods: ['GET'])]
-    public function index(SampleRepository $sampleRepository): Response
+    public function index(SampleRepository $sampleRepository,PaginatorInterface $paginator, Request $request): Response
     {
+        $query = $sampleRepository->findAll();
+
+        $samples = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            5
+        );
+
         return $this->render('sample/index.html.twig', [
-            'samples' => $sampleRepository->findAll(),
+            'samples' => $samples,
         ]);
     }
 
