@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Equipment;
 use App\Form\EquipmentType;
 use App\Repository\EquipmentRepository;
+use App\Service\PaginatorService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,15 +17,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class EquipmentController extends AbstractController
 {
     #[Route('/', name: 'app_equipment_index', methods: ['GET'])]
-    public function index(EquipmentRepository $equipmentRepository, PaginatorInterface $paginator, Request $request): Response
+    public function index(PaginatorService $paginatorService, EquipmentRepository $equipmentRepository, Request $request): Response
     {
-        $query = $equipmentRepository->findAll();
-
-        $equipments = $paginator->paginate(
-            $query,
-            $request->query->get('page', 1),
-            6
-        );
+        $equipments = $paginatorService->paginate($request, $equipmentRepository->findBy([], ['id' => 'DESC']), 6);
 
         return $this->render('equipment/index.html.twig', [
             'equipments' => $equipments,

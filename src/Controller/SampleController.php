@@ -19,7 +19,7 @@ class SampleController extends AbstractController
     #[Route('/', name: 'app_sample_index', methods: ['GET'])]
     public function index(SampleRepository $sampleRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $query = $sampleRepository->findAll();
+        $query = $sampleRepository->findBy([], ['id' => 'DESC']);
 
         $samples = $paginator->paginate(
             $query,

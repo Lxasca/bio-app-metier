@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Project;
 use App\Form\ProjectType;
 use App\Repository\ProjectRepository;
+use App\Service\PaginatorService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,15 +19,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProjectController extends AbstractController
 {
     #[Route('/', name: 'app_project_index', methods: ['GET'])]
-    public function index(ProjectRepository $projectRepository, PaginatorInterface $paginator, Request $request): Response
+    public function index(PaginatorService $paginatorService, ProjectRepository $projectRepository, Request $request): Response
     {
-        $query = $projectRepository->findAll();
 
-        $projects = $paginator->paginate(
-            $query,
-            $request->query->get('page', 1),
-            5
-        );
+        $projects = $paginatorService->paginate($request, $projectRepository->findBy([], ['id' => 'DESC']), 5);
 
         return $this->render('project/index.html.twig', [
             'projects' => $projects,

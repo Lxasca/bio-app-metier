@@ -19,7 +19,7 @@ class TestController extends AbstractController
     #[Route('/', name: 'app_test_index', methods: ['GET'])]
     public function index(TestRepository $testRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $query = $testRepository->findAll();
+        $query = $testRepository->findBy([], ['id' => 'DESC']);
 
         $tests = $paginator->paginate(
             $query,

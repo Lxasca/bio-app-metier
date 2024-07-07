@@ -18,7 +18,7 @@ class ResultController extends AbstractController
     #[Route('/', name: 'app_result_index', methods: ['GET'])]
     public function index(ResultRepository $resultRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $query = $resultRepository->findAll();
+        $query = $resultRepository->findBy([], ['id' => 'DESC']);
 
         $results = $paginator->paginate(
             $query,
